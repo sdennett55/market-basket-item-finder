@@ -837,7 +837,7 @@ function updateList() {
 
     shoppingList.forEach(function (item) {
       var listItem = document.createElement('li');
-      listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button onclick=\"removeFromList('").concat(item.name, "')\">x</button>");
+      listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button onclick=\"removeFromList('").concat(item.name, "')\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 90.1 90.1\"><path d=\"M55.8 45l32.1 32.1c3 3 3 7.7 0 10.7s-7.7 3-10.7 0L45 55.8 12.9 87.9c-3 3-7.7 3-10.7 0s-3-7.7 0-10.7l32.1-32.1-32-32.2c-3-3-3-7.7 0-10.7s7.7-3 10.7 0l32 32.1 32.2-32c3-3 7.7-3 10.7 0s3 7.7 0 10.7L55.8 45z\"/></svg></button>");
       document.querySelector('.ShoppingList').appendChild(listItem);
     });
   } else {
@@ -846,10 +846,10 @@ function updateList() {
 
     shoppingList.forEach(function (item) {
       var listItem = document.createElement('li');
-      listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button onclick=\"removeFromList('").concat(item.name, "')\">x</button>");
+      listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button onclick=\"removeFromList('").concat(item.name, "')\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 90.1 90.1\"><path d=\"M55.8 45l32.1 32.1c3 3 3 7.7 0 10.7s-7.7 3-10.7 0L45 55.8 12.9 87.9c-3 3-7.7 3-10.7 0s-3-7.7 0-10.7l32.1-32.1-32-32.2c-3-3-3-7.7 0-10.7s7.7-3 10.7 0l32 32.1 32.2-32c3-3 7.7-3 10.7 0s3 7.7 0 10.7L55.8 45z\"/></svg></button>");
       listElem.appendChild(listItem);
     });
-    document.querySelector('.ShoppingListWrap').innerHTML = '<h2>Shopping List <button onclick="clearShoppingList()">x</button></h2>';
+    document.querySelector('.ShoppingListWrap').innerHTML = '<h2>Shopping List <button onclick="clearShoppingList()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.1 90.1"><path d="M55.8 45l32.1 32.1c3 3 3 7.7 0 10.7s-7.7 3-10.7 0L45 55.8 12.9 87.9c-3 3-7.7 3-10.7 0s-3-7.7 0-10.7l32.1-32.1-32-32.2c-3-3-3-7.7 0-10.7s7.7-3 10.7 0l32 32.1 32.2-32c3-3 7.7-3 10.7 0s3 7.7 0 10.7L55.8 45z"/></svg></button></h2>';
     document.querySelector('.ShoppingListWrap').appendChild(listElem);
   }
 
@@ -884,7 +884,7 @@ input.addEventListener('keyup', function (e) {
       }
 
       var listItem = document.createElement('li');
-      listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button onclick=\"addToList('").concat(item.name, "')\">+</button>");
+      listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button class=\"RemoveButton\" onclick=\"addToList('").concat(item.name, "')\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 90.1 90.1\"><path d=\"M55.8 45l32.1 32.1c3 3 3 7.7 0 10.7s-7.7 3-10.7 0L45 55.8 12.9 87.9c-3 3-7.7 3-10.7 0s-3-7.7 0-10.7l32.1-32.1-32-32.2c-3-3-3-7.7 0-10.7s7.7-3 10.7 0l32 32.1 32.2-32c3-3 7.7-3 10.7 0s3 7.7 0 10.7L55.8 45z\"/></svg></button>");
       results.appendChild(listItem);
     }
   } catch (err) {
