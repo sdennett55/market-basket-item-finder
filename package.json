@@ -5,7 +5,8 @@
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "./node_modules/.bin/babel src --out-dir dist"
+    "babel": "./node_modules/.bin/babel src --out-dir dist",
+    "build": "babel src/script.js --out-file dist/script-transpiled.js && node build.js"
   },
   "keywords": [],
   "author": "",
