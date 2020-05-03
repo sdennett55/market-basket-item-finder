@@ -189,6 +189,10 @@ const input = document.querySelector('input');
 const results = document.querySelector('.results');
 
 function onLoad() {
+  if (!localStorage.getItem('mb-list')) {
+    return;
+  }
+  
   shoppingList = JSON.parse(localStorage.getItem('mb-list'));
 
   if (shoppingList.length) {
