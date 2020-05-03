@@ -192,7 +192,7 @@ function onLoad() {
   if (!localStorage.getItem('mb-list')) {
     return;
   }
-  
+
   shoppingList = JSON.parse(localStorage.getItem('mb-list'));
 
   if (shoppingList.length) {
@@ -214,6 +214,10 @@ function addToList(itemName) {
   if (shoppingList.findIndex(item => item.name === itemName) !== -1) {
     return;
   }
+  const searchBar = document.querySelector('#quickSearch');
+  searchBar.value = '';
+  searchBar.focus();
+
   const match = items.find(item => item.name === itemName);
 
   shoppingList.push(match);
