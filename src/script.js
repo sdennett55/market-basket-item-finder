@@ -186,7 +186,7 @@ const items = [
 var shoppingList = [];
 
 const input = document.querySelector('input');
-const results = document.querySelector('.results');
+let quickSearchIsBelow = false;
 
 function onLoad() {
   if (!localStorage.getItem('mb-list')) {
@@ -280,12 +280,39 @@ function updateList() {
   localStorage.setItem('mb-list', JSON.stringify(shoppingList));
 }
 
-input.addEventListener('keyup', e => {
-  results.innerHTML = '';
+function moveQuickSearch() {
+  document.querySelector('.results').innerHTML = '';
+
+  const quickSearch = document.querySelector('.QuickSearch');
+  const quickSearchHtml = quickSearch.innerHTML;
+  const mainElem = document.querySelector('main');
+  mainElem.removeChild(quickSearch);
+
+  if (quickSearchIsBelow) {
+    const newQuickSearch = document.createElement('div');
+    newQuickSearch.className = 'QuickSearch';
+    newQuickSearch.innerHTML = quickSearchHtml;
+    mainElem.prepend(newQuickSearch);
+    quickSearchIsBelow = false;
+  } else {
+    const newQuickSearch = document.createElement('div');
+    newQuickSearch.className = 'QuickSearch';
+    newQuickSearch.innerHTML = quickSearchHtml;
+    mainElem.appendChild(newQuickSearch);
+    quickSearchIsBelow = true;
+  }
+}
+
+function handleKeyUp(e) {
+  console.log(e.target.id);
+  if (e.target.id !== 'quickSearch') {
+    return;
+  }
+  document.querySelector('.results').innerHTML = '';
   if (e.target.value === '') {
     return;
   }
-  
+
   const filteredItems = items.filter(item => searchFilters({ item, e }));
 
   for (const [index, item] of filteredItems.entries()) {
@@ -294,6 +321,9 @@ input.addEventListener('keyup', e => {
     }
     let listItem = document.createElement('li');
     listItem.innerHTML = `<span style="flex-grow:1;padding-right: 1em;">${item.name}</span> <span style="padding-right: 1em">${item.aisle}</span> <button class="RemoveButton" onclick="addToList('${item.name}')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.1 90.1"><path d="M55.8 45l32.1 32.1c3 3 3 7.7 0 10.7s-7.7 3-10.7 0L45 55.8 12.9 87.9c-3 3-7.7 3-10.7 0s-3-7.7 0-10.7l32.1-32.1-32-32.2c-3-3-3-7.7 0-10.7s7.7-3 10.7 0l32 32.1 32.2-32c3-3 7.7-3 10.7 0s3 7.7 0 10.7L55.8 45z"/></svg></button>`;
-    results.appendChild(listItem);
+    document.querySelector('.results').appendChild(listItem);
   }
-});
+
+}
+
+document.querySelector('main').addEventListener('keyup', e => handleKeyUp(e));

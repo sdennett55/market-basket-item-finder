@@ -753,7 +753,7 @@ var items = [{
 }];
 var shoppingList = [];
 var input = document.querySelector('input');
-var results = document.querySelector('.results');
+var quickSearchIsBelow = false;
 
 function onLoad() {
   if (!localStorage.getItem('mb-list')) {
@@ -856,8 +856,37 @@ function updateList() {
   localStorage.setItem('mb-list', JSON.stringify(shoppingList));
 }
 
-input.addEventListener('keyup', function (e) {
-  results.innerHTML = '';
+function moveQuickSearch() {
+  document.querySelector('.results').innerHTML = '';
+  var quickSearch = document.querySelector('.QuickSearch');
+  var quickSearchHtml = quickSearch.innerHTML;
+  var mainElem = document.querySelector('main');
+  mainElem.removeChild(quickSearch);
+
+  if (quickSearchIsBelow) {
+    var newQuickSearch = document.createElement('div');
+    newQuickSearch.className = 'QuickSearch';
+    newQuickSearch.innerHTML = quickSearchHtml;
+    mainElem.prepend(newQuickSearch);
+    quickSearchIsBelow = false;
+  } else {
+    var _newQuickSearch = document.createElement('div');
+
+    _newQuickSearch.className = 'QuickSearch';
+    _newQuickSearch.innerHTML = quickSearchHtml;
+    mainElem.appendChild(_newQuickSearch);
+    quickSearchIsBelow = true;
+  }
+}
+
+function handleKeyUp(e) {
+  console.log(e.target.id);
+
+  if (e.target.id !== 'quickSearch') {
+    return;
+  }
+
+  document.querySelector('.results').innerHTML = '';
 
   if (e.target.value === '') {
     return;
@@ -885,11 +914,15 @@ input.addEventListener('keyup', function (e) {
 
       var listItem = document.createElement('li');
       listItem.innerHTML = "<span style=\"flex-grow:1;padding-right: 1em;\">".concat(item.name, "</span> <span style=\"padding-right: 1em\">").concat(item.aisle, "</span> <button class=\"RemoveButton\" onclick=\"addToList('").concat(item.name, "')\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 90.1 90.1\"><path d=\"M55.8 45l32.1 32.1c3 3 3 7.7 0 10.7s-7.7 3-10.7 0L45 55.8 12.9 87.9c-3 3-7.7 3-10.7 0s-3-7.7 0-10.7l32.1-32.1-32-32.2c-3-3-3-7.7 0-10.7s7.7-3 10.7 0l32 32.1 32.2-32c3-3 7.7-3 10.7 0s3 7.7 0 10.7L55.8 45z\"/></svg></button>");
-      results.appendChild(listItem);
+      document.querySelector('.results').appendChild(listItem);
     }
   } catch (err) {
     _iterator.e(err);
   } finally {
     _iterator.f();
   }
+}
+
+document.querySelector('main').addEventListener('keyup', function (e) {
+  return handleKeyUp(e);
 });

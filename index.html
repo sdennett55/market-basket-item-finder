@@ -12,9 +12,11 @@
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
     }
+
     * {
       box-sizing: border-box;
     }
+
     ul {
       margin: 0;
     }
@@ -25,6 +27,7 @@
       align-items: center;
       margin: 2em;
     }
+
     button {
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -41,10 +44,12 @@
       align-items: center;
       flex-shrink: 0;
     }
+
     button:focus {
       outline: 0;
       opacity: .5;
     }
+
     svg {
       display: block;
       fill: currentColor;
@@ -52,15 +57,17 @@
       height: 10px;
       pointer-events: none;
     }
+
     .RemoveButton svg {
       transform: rotate(45deg);
     }
+
     label {
       display: block;
       font-size: 1.5em;
-      margin-bottom: .5em;
       font-weight: bold;
     }
+
     input {
       background: #f1f1f1;
       -webkit-appearance: none;
@@ -72,9 +79,11 @@
       border: 0;
       font-size: 16px;
     }
+
     input:focus {
       outline: 0;
     }
+
     .QuickSearch,
     .ShoppingListWrap:not(:empty) {
       max-width: 600px;
@@ -83,21 +92,29 @@
       border-radius: 16px;
       width: 100%;
     }
-    .QuickSearch button {
+
+    .results button {
       background: #69ad29;
     }
-    .ShoppingListWrap:not(:empty) {
+
+    .QuickSearch + .ShoppingListWrap:not(:empty) {
       margin-top: 2em;
     }
+    .ShoppingListWrap:not(:empty) + .QuickSearch {
+      margin-top: 2em;
+    }
+
     .ShoppingList,
     .results:not(:empty) {
       margin: 1em 0 0;
       padding: 0;
       list-style: none;
     }
+
     .ShoppingList button {
       background: #da4646;
     }
+
     li {
       display: flex;
       justify-content: space-between;
@@ -105,9 +122,11 @@
       margin: .5em 0;
       padding: .5em 1em;
     }
+
     li:nth-child(2n + 2) {
       background: rgba(0, 0, 0, .03);
     }
+
     h2 {
       display: flex;
       justify-content: space-between;
@@ -115,17 +134,23 @@
       margin: 0;
       font-size: 1.5em;
     }
+
+    .QuickSearch-reorderBtn,
     h2 button {
       background: transparent;
       color: #464444;
     }
+
+    .QuickSearch-reorderIcon,
     h2 svg {
       width: 24px;
       height: 24px;
     }
+
     .InputWrap {
       position: relative;
     }
+
     .SearchIcon {
       position: absolute;
       top: 50%;
@@ -134,16 +159,33 @@
       width: 17px;
       height: 17px;
     }
+    .QuickSearch-titleWrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .5em;
+    }
   </style>
 </head>
 
 <body>
   <main>
     <div class="QuickSearch">
-      <label for="quickSearch">Quick Search</label>
+      <div class="QuickSearch-titleWrap">
+        <label for="quickSearch">Quick Search</label>
+        <button class="QuickSearch-reorderBtn" onclick="moveQuickSearch()">
+          <svg class="QuickSearch-reorderIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.4 59">
+            <path
+              d="M26.7 45h1.5c1.1 0 1.5.8 1 1.7l-6.9 11.6c-.6 1-1.5 1-2.1 0l-6.9-11.6c-.6-1-.1-1.7 1-1.7h1.5c1.1 0 2-.9 2-2V22c0-1.1.9-2 2-2h3c1.1 0 2 .9 2 2v21c-.1 1.1.8 2 1.9 2zm-24-31H1.2c-1.1 0-1.5-.8-1-1.7L7.2.7c.6-1 1.5-1 2.1 0l6.9 11.6c.6 1 .1 1.7-1 1.7h-1.5c-1.1 0-2 .9-2 2v21c0 1.1-.9 2-2 2h-3c-1.1 0-2-.9-2-2V16c0-1.1-.9-2-2-2z" />
+            </svg>
+        </button>
+      </div>
       <div class="InputWrap">
         <input type="text" id="quickSearch" />
-        <svg class="SearchIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89.9 90"><path d="M88.4 80L65.8 57.5c4.3-6 6.8-13.3 6.8-21.2C72.6 16.2 56.4 0 36.3 0S0 16.2 0 36.3s16.2 36.3 36.3 36.3c7.8 0 15.1-2.5 21-6.7l22.6 22.6c2 2 5.4 2 7.4 0l1.1-1.1c2-2 2-5.3 0-7.4zM10.8 36.3c0-14.1 11.4-25.5 25.5-25.5s25.5 11.4 25.5 25.5-11.4 25.5-25.5 25.5-25.5-11.4-25.5-25.5z"/></svg>
+        <svg class="SearchIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89.9 90">
+          <path
+            d="M88.4 80L65.8 57.5c4.3-6 6.8-13.3 6.8-21.2C72.6 16.2 56.4 0 36.3 0S0 16.2 0 36.3s16.2 36.3 36.3 36.3c7.8 0 15.1-2.5 21-6.7l22.6 22.6c2 2 5.4 2 7.4 0l1.1-1.1c2-2 2-5.3 0-7.4zM10.8 36.3c0-14.1 11.4-25.5 25.5-25.5s25.5 11.4 25.5 25.5-11.4 25.5-25.5 25.5-25.5-11.4-25.5-25.5z" />
+          </svg>
       </div>
       <ul class="results"></ul>
     </div>
