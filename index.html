@@ -41,6 +41,10 @@
       align-items: center;
       flex-shrink: 0;
     }
+    button:focus {
+      outline: 0;
+      opacity: .5;
+    }
     svg {
       display: block;
       fill: currentColor;
@@ -66,6 +70,7 @@
       width: 100%;
       padding: .75em 47px .75em 1em;
       border: 0;
+      font-size: 16px;
     }
     input:focus {
       outline: 0;
@@ -109,6 +114,14 @@
       align-items: center;
       margin: 0;
       font-size: 1.5em;
+    }
+    h2 button {
+      background: transparent;
+      color: #464444;
+    }
+    h2 svg {
+      width: 24px;
+      height: 24px;
     }
     .InputWrap {
       position: relative;
